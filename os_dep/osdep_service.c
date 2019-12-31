@@ -25,6 +25,11 @@
 
 #define RT_TAG	'1178'
 
+/* This is to fix get_ds() type mismatch on kernels above 5.1.x */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 1, 0))
+	#define get_ds() KERNEL_DS
+#endif
+
 #ifdef DBG_MEMORY_LEAK
 	#ifdef PLATFORM_LINUX
 		atomic_t _malloc_cnt = ATOMIC_INIT(0);
